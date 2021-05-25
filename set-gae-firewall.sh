@@ -7,12 +7,13 @@ declare -a rule_descriptions=()
 checkProjectAccess() {
   if [ -z "$PROJECT_ID" ];
   then
-    echo "A project ID is required."
+    echo "Error: A project ID is required"
     exit 1
   fi
   if [ $(gcloud projects list --filter="id=$PROJECT_ID" | grep -oc $1 $PROJECT_ID) -eq 0 ];
   then
-    echo "User does not have access to ${PROJECT_ID}. Log in using the command: gcloud auth login"
+    echo "Error: User does not have access to ${PROJECT_ID}"
+    echo "Log in using the command: gcloud auth login"
     exit 1
   fi
 }
@@ -142,26 +143,27 @@ case $ACTION in
     HELP_TEXT=Disabling
     ;;
   *)
-    echo "Invalid argument for --action, expected one of [enable, disable]"
+    echo "Error: Invalid argument for --action, expected one of [enable, disable]"
+    exit 1
     ;;
 esac
 
 if [ -z $DEFAULT_ACTION ];
 then
-  echo "The --enable or --disable flag is required"
+  echo "Error: The --enable or --disable flag is required"
   exit 1
 fi
 
 # Ensure file is set
 if [ -z $INPUT_FILE ];
 then
-  echo "An input file must be specified using --file <file_name>"
+  echo "Error: An input file must be specified using --file <file_name>"
   exit 1
 fi
 
 # Ensure file exists
 if [ ! -f $INPUT_FILE ]; then
-  echo "$INPUT_FILE does not exist"
+  echo "Error: $INPUT_FILE does not exist"
   exit 1
 fi
 

@@ -4,17 +4,14 @@ This script automatically adds or removes the required firewall rules to
 restrict your Google App Engine instance to only be accessible through a list of
 given IPs.
 
-The example in this repository, `cloudfront-ips.txt`, lists the IP ranges for
-AWS Cloudfront which can be found
+A sample list of IPs is provided this repository, `cloudfront-ips.txt`. This
+list contains the IP ranges for AWS Cloudfront which can be found
 [here](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/LocationsOfEdgeServers.html).
 
 ## Pre-requisites
 
 - You must have the [Google Cloud SDK](https://cloud.google.com/sdk/install)
   installed on your machine.
-
-- You must have initialised GCloud and selected the project on which you want to
-  set the firewall rules for. Use `gcloud init` to initailise GCloud.
 
 ## Usage
 
